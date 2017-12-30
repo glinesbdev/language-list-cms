@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { LoginModule } from 'app/login/login.module';
+import { AppRouterModule } from './router/app-router.module';
+import {NgxElectronModule} from 'ngx-electron';
 
 import { AppComponent } from './app.component';
 
@@ -11,8 +13,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    HttpModule,
+    NgxElectronModule,
+    LoginModule,
+    AppRouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
