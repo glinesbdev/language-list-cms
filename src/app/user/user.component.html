@@ -1,8 +1,7 @@
 <div class="user-detail-wrapper" *ngIf="userLoaded">
   <div class="row">
     <div class="col-xs-12">
-        <span *ngIf="model.username">Welcome <span class="bold">{{ model.username }}</span></span>
-        <span *ngIf="model.email && !model.username" class="bold">Welcome <span class="bold">{{ model.email }}</span></span>
+        <span>Welcome <span class="bold">{{ model.username ? model.username : model.email }}</span></span>
         <a href="javascript:void(0)" class="logout-btn" (click)="logout()">Logout</a>
     </div>
   </div>
@@ -13,7 +12,7 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let list of lists">
             <span class="badge" *ngIf="list.items.length">{{ list.items.length }}</span>
-            {{ list.name }}
+            <a [routerLink]="['/word-list', list.id]">{{ list.name }}</a>
           </li>
         </ul>
       </div>

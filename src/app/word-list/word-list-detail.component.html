@@ -1,0 +1,31 @@
+<div *ngIf="listLoaded">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="text-center">{{ model.name }}</h2>
+      <a href="javascript:void(0)" class="btn btn-default add-btn">
+        <i class="glyphicon glyphicon-plus"></i> Add Item        
+      </a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Word</th>
+            <th>Translation</th>
+            <th>Context</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of model.items">
+            <td>{{ item.item.word }}</td>
+            <td>{{ item.item.translation }}</td>
+            <td>{{ item.item.context }}</td>
+            <td>
+              <i class="glyphicon glyphicon-pencil"></i>
+              <i class="glyphicon glyphicon-trash"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

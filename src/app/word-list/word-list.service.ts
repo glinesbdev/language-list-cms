@@ -37,4 +37,21 @@ export class WordListService {
       .catch((err: Response) => Observable.throw(err || 'Server error'));
   }
 
+  getWordList(id: number): Observable<IWordList> {
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'access-token': this.headers['access-token'][0],
+      'client': this.headers['client'][0],
+      'expiry': this.headers['expiry'][0],
+      'token-type': this.headers['token-type'][0],
+      'uid': this.headers['uid'][0]
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(`${this.apiUrl}/${id}.json`, options)
+      .map((data: Response) => data.json())
+      .catch((err: Response) => Observable.throw(err || 'Server error'));
+  }
+
 }
