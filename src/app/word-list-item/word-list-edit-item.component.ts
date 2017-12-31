@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { WordListItemService } from 'app/word-list-item/word-list-item.service';
+import { WordListItemService } from './word-list-item.service';
 import { ActivatedRoute } from '@angular/router/src/router_state';
-import { WordListItemModel } from '../word-list-item/word-list-item.model';
+import { WordListItemModel } from './word-list-item.model';
 import { Router } from '@angular/router';
 
 @Component({
-  templateUrl: './word-list-edit.component.html',
-  styleUrls: ['./word-list-edit.component.css']
+  templateUrl: './word-list-edit-item.component.html',
+  styleUrls: ['./word-list-edit-item.component.css']
 })
-export class WordListEditComponent implements OnInit {
+export class WordListEditItemComponent implements OnInit {
 
   constructor(private wordListItemService: WordListItemService, private router: Router, private route: ActivatedRoute) { }
 
@@ -24,7 +24,7 @@ export class WordListEditComponent implements OnInit {
 
     this.wordListItemService.getItem(id).subscribe(
       item => {
-        this.model = item.item;
+        this.model = item;
         this.itemLoaded = true;
       },
       error => console.error(error)

@@ -16,18 +16,29 @@ export class LoginService {
 
   private authUrl: string = 'http://localhost:3000/auth';
 
-  login(body: Object): Observable<ILogin> {
+  login(email: string, password: string, rememberMe: boolean = false): Observable<ILogin> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
+
+    let body = {
+      email: email,
+      password: password
+    };
+    
+    let savedObj = {
+      userId: undefined,
+      headers: undefined
+    };
     
     return this.http.post(`${this.authUrl}/sign_in`, body, options)
       .map((data: Response) => {
-        this.storageManager.setLogin(JSON.stringify({
-          userId: data.json().data.id,
-          headers: data.headers.toJSON()
-        }));
+        if (rememberMe) {
+          savedObj.userId = data.json().data.id;
+        }
 
-        return data.json();
+        savedObj.headers = data.headers.toJSON();
+        this.storageManager.setLogin(JSON.stringify(savedObj));
+        return data.json().data;
       })
       .catch((err: Response) => Observable.throw(err || 'Server error'));
   }

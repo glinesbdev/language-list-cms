@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { ILogin } from './login';
-import { LoginModel } from './login.model';
 import { StorageManagerService } from 'app/shared/storage.manager';
 
 @Component({
@@ -13,14 +12,17 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService, private router: Router, private storageManger: StorageManagerService) { }
 
-  model: LoginModel = new LoginModel('', '');
+  model: ILogin;
   errors: string[] = [];
+  email: string;
+  password: string;
+  rememberMe: boolean = false;
 
   ngOnInit() {
     if (this.storageManger.getLogin()) {
       let data = this.storageManger.getLogin();
 
-      if (data['userId'] > 0) {
+      if (data['userId']) {
         this.router.navigate(['/user', data['userId']]);
       }
     }
@@ -28,18 +30,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit(event): void {
     event.preventDefault();
-    this.loginService.login(this.model).subscribe(
-      login => this.goToUserPage(login.data),
+    this.loginService.login(this.email, this.password, this.rememberMe).subscribe(
+      login => this.goToUserPage(login),
       error => {
         this.errors = JSON.parse(error._body)['errors'];
-        this.model.email = this.model.password = '';
+        this.email = this.password = '';
       }
     );
   }
 
   goToUserPage(login: any): void {
     if (!isNaN(+login.id) || +login.id > 0) {
-      this.router.navigate(['/user', login.id]);
+      this.router.navigate(['/user', login.id, { rememberMe: this.rememberMe, userId: login.id }]);
     }
   }
 

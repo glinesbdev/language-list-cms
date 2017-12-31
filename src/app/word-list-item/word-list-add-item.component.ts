@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router/src/router';
 import { ActivatedRoute } from '@angular/router/src/router_state';
-import { WordListAddModel } from './word-list-add.model';
 import { WordListItemService } from '../word-list-item/word-list-item.service';
+import { IWordListItem } from 'app/word-list-item/word-list-item';
 
 @Component({
-  templateUrl: './word-list-add.component.html',
-  styleUrls: ['./word-list-add.component.css']
+  templateUrl: './word-list-add-item.component.html',
+  styleUrls: ['./word-list-add-item.component.css']
 })
-export class WordListAddComponent implements OnInit {
+export class WordListAddItemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private wordListItemService: WordListItemService) {}
 
   listId: number;
   listName: string;
-  model: WordListAddModel = new WordListAddModel();
+  model: IWordListItem = new IWordListItem();
 
   ngOnInit() {
     this.listId = this.route.snapshot.queryParams['listId'];

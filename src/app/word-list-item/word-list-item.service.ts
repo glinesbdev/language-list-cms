@@ -25,7 +25,7 @@ export class WordListItemService {
     let options = this.populateOptions(headers);
 
     return this.http.get(`${this.apiUrl}/${id}.json`, options)
-      .map((data: Response) => data.json())
+      .map((data: Response) => data.json().item)
       .catch((err: any) => Observable.throw(err || 'Server error'));
   }
 
@@ -34,7 +34,7 @@ export class WordListItemService {
     let options = this.populateOptions(headers);
 
     return this.http.post(`${this.apiUrl}.json`, body, options)
-      .map((data: Response) => data.json())
+      .map((data: Response) => data.json().item)
       .catch((err: any) => Observable.throw(err || 'Server error'));
   }
 
@@ -44,7 +44,7 @@ export class WordListItemService {
     let options = this.populateOptions(headers);
 
     return this.http.put(`${this.apiUrl}/${id}.json`, body, options)
-      .map((data: Response) => data.json())
+      .map((data: Response) => data.json().item)
       .catch((err: any) => Observable.throw(err || 'Server error'));
   }
 

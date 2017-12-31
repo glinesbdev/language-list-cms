@@ -21,7 +21,7 @@ export class WordListService {
   private headers = Object;
   private apiUrl = 'http://localhost:3000/api/v1/word_list';
 
-  getWordLists(): Observable<Array<IWordList>> {
+  getLists(): Observable<IWordList[]> {
     let headers = this.populateHeaders();
     let options = this.populateOptions(headers);
 
@@ -30,12 +30,21 @@ export class WordListService {
       .catch((err: Response) => Observable.throw(err || 'Server error'));
   }
 
-  getWordList(id: number): Observable<IWordList> {
+  getList(id: number): Observable<IWordList> {
     let headers = this.populateHeaders();
     let options = this.populateOptions(headers);
 
     return this.http.get(`${this.apiUrl}/${id}.json`, options)
-      .map((data: Response) => data.json())
+      .map((data: Response) => data.json().list)
+      .catch((err: Response) => Observable.throw(err || 'Server error'));
+  }
+
+  addList(body: Object): Observable<IWordList> {
+    let headers = this.populateHeaders();
+    let options = this.populateOptions(headers);
+
+    return this.http.post(`${this.apiUrl}.json`, body, options)
+      .map((data: Response) => data.json().list)
       .catch((err: Response) => Observable.throw(err || 'Server error'));
   }
 

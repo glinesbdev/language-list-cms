@@ -33,7 +33,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.get(`${this.apiPath}/${id}.json`, options)
-      .map((data: Response) => data.json())
+      .map((data: Response) => data.json().user)
       .catch((err: Response) => Observable.throw(err || 'Server error'));
   }
 

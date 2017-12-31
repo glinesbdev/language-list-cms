@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { WordListEditComponent } from './word-list-edit.component';
+import { WordListEditItemComponent } from './word-list-edit-item.component';
 
-describe('WordListEditComponent', () => {
-  let component: WordListEditComponent;
-  let fixture: ComponentFixture<WordListEditComponent>;
+describe('WordListEditItemComponent', () => {
+  let component: WordListEditItemComponent;
+  let fixture: ComponentFixture<WordListEditItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WordListEditComponent ]
+      declarations: [ WordListEditItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WordListEditComponent);
+    fixture = TestBed.createComponent(WordListEditItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

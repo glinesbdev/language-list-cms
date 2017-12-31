@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserComponent } from '../user/user.component';
 import { WordListDetailComponent } from '../word-list/word-list-detail.component';
-import { WordListAddComponent } from '../word-list/word-list-add.component';
-import { WordListEditComponent } from '../word-list/word-list-edit.component';
+import { WordListAddItemComponent } from '../word-list-item/word-list-add-item.component';
+import { WordListEditItemComponent } from '../word-list-item/word-list-edit-item.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild([
       { path: 'user/:id', component: UserComponent },
-      { path: 'word-list/new', component: WordListAddComponent },
-      { path: 'word-list/:id/edit', component: WordListEditComponent },
+      { path: 'word-list-item/new', component: WordListAddItemComponent },
+      { path: 'word-list-item/:id/edit', component: WordListEditItemComponent },
       { path: 'word-list/:id', component: WordListDetailComponent },
     ])
   ],

@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { UserRouterModule } from '../router/user-router.module';
 import { WordListDetailComponent } from '../word-list/word-list-detail.component';
-import { WordListAddComponent } from '../word-list/word-list-add.component';
+import { WordListAddItemComponent } from '../word-list-item/word-list-add-item.component';
 import { FormsModule } from '@angular/forms';
-import { WordListEditComponent } from '../word-list/word-list-edit.component';
+import { WordListEditItemComponent } from '../word-list-item/word-list-edit-item.component';
 
 @NgModule({
   imports: [
@@ -13,7 +13,12 @@ import { WordListEditComponent } from '../word-list/word-list-edit.component';
     UserRouterModule,
     FormsModule
   ],
-  declarations: [UserComponent, WordListDetailComponent, WordListAddComponent, WordListEditComponent],
+  declarations: [
+    UserComponent,
+    WordListDetailComponent,
+    WordListAddItemComponent,
+    WordListEditItemComponent
+  ],
   exports: [UserRouterModule]
 })
 export class UserModule { }
