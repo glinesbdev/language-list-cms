@@ -8,9 +8,10 @@ import { AppRouterModule } from './router/app-router.module';
 import { LoginService } from './login/login.service';
 import { UserService } from './user/user.service';
 import { WordListService } from './word-list/word-list.service';
+import { StorageManagerService } from './shared/storage.manager';
+import { WordListItemService } from './word-list-item/word-list-item.service';
 
 import { AppComponent } from './app.component';
-import { StorageManagerService } from './shared/storage.manager';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { StorageManagerService } from './shared/storage.manager';
     LoginService,
     UserService,
     StorageManagerService,
-    WordListService
+    WordListService,
+    WordListItemService
   ],
   bootstrap: [AppComponent]
 })

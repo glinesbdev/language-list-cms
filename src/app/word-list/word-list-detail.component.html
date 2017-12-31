@@ -1,8 +1,21 @@
 <div *ngIf="listLoaded">
   <div class="row">
     <div class="col-xs-12">
+        <a [routerLink]="['/user', model.user.id]">
+          <i class="glyphicon glyphicon-chevron-left"></i> Back
+        </a>
+    </div>
+  </div>
+  <div class="row" *ngIf="message">
+    <div class="col-xs-12">
+      <p class="alert alert-info text-center">{{ message }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
       <h2 class="text-center">{{ model.name }}</h2>
-      <a href="javascript:void(0)" class="btn btn-default add-btn">
+      <h4 class="text-center">{{ model.language }}</h4>
+      <a [routerLink]="['/word-list/new']" [queryParams]="{ listId: model.id, listName: model.name }" class="btn btn-default add-btn">
         <i class="glyphicon glyphicon-plus"></i> Add Item        
       </a>
       <table class="table">
@@ -20,8 +33,12 @@
             <td>{{ item.item.translation }}</td>
             <td>{{ item.item.context }}</td>
             <td>
-              <i class="glyphicon glyphicon-pencil"></i>
-              <i class="glyphicon glyphicon-trash"></i>
+              <a [routerLink]="['/word-list', item.item.id, 'edit']" [queryParams]="{ listId: model.id, listName: model.name }" class="btn btn-xs btn-default edit-btn">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </a>
+              <button type="button" class="btn btn-xs btn-default delete-btn" (click)="deleteItem(item.item.id)">
+                <i class="glyphicon glyphicon-trash"></i>
+              </button>
             </td>
           </tr>
         </tbody>

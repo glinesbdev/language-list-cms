@@ -6,6 +6,7 @@ require('dotenv').config();
 require('electron-reload')(__dirname);
 
 let win = null;
+let addItemWin = null;
 
 app.on('window-all-closed', function () {
   if (process.platform != 'darwin') {

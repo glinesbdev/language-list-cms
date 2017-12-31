@@ -17,7 +17,6 @@ export class LoginService {
   private authUrl: string = 'http://localhost:3000/auth';
 
   login(body: Object): Observable<ILogin> {
-    let bodyString = JSON.stringify(body);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     

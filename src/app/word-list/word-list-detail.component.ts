@@ -3,6 +3,8 @@ import { WordListService } from './word-list.service';
 import { ActivatedRoute } from '@angular/router';
 import { WordListModel } from './word-list.model';
 import { IWordList } from './word-list';
+import { WordListItemService } from '../word-list-item/word-list-item.service';
+import { Router } from '@angular/router/src/router';
 
 @Component({
   templateUrl: './word-list-detail.component.html',
@@ -10,10 +12,11 @@ import { IWordList } from './word-list';
 })
 export class WordListDetailComponent implements OnInit {
 
-  constructor(private wordListService: WordListService, private route: ActivatedRoute) { }
+  constructor(private wordListService: WordListService, private wordListItemService: WordListItemService, private router: Router, private route: ActivatedRoute) { }
 
   model: WordListModel;
   listLoaded: boolean = false;
+  message: string;
 
   ngOnInit() {
     let listId: number = this.route.snapshot.params['id'];
@@ -24,6 +27,20 @@ export class WordListDetailComponent implements OnInit {
       },
       error => console.error(error)
     );
+  }
+
+  deleteItem(id: number): void {
+    this.wordListItemService.deleteItem(id).subscribe(
+      item => {
+        this.message = item['message'];
+        this.model.items = this.model.items.splice(id, id);
+      },
+      error => console.error(error)
+    );
+  }
+
+  trackByItem(index: number, item: any): number {
+    return item.item.id;
   }
 
   private populateList(list: IWordList): WordListModel {
