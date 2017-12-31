@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -14,7 +14,6 @@ app.on('window-all-closed', function () {
 });
 
 app.on('ready', function () {
-
   // Initialize the window to our specified dimensions
   win = new BrowserWindow({width: 1000, height: 600});
 
@@ -32,9 +31,6 @@ app.on('ready', function () {
 
   // Remove window once app is closed
   win.on('closed', function () {
-
     win = null;
-
   });
-
 });

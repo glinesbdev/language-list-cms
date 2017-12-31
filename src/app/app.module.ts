@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { LoginModule } from 'app/login/login.module';
+import { LoginModule } from './login/login.module';
+import { UserModule } from './user/user.module';
 import { AppRouterModule } from './router/app-router.module';
-import {NgxElectronModule} from 'ngx-electron';
+
+import { LoginService } from './login/login.service';
+import { UserService } from './user/user.service';
 
 import { AppComponent } from './app.component';
+import { StorageManagerService } from './shared/storage.manager';
 
 @NgModule({
   declarations: [
@@ -14,11 +18,15 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpModule,
-    NgxElectronModule,
     LoginModule,
+    UserModule,
     AppRouterModule
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    UserService,
+    StorageManagerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

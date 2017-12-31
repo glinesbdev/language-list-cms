@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login/login.service';
-import { ILogin } from 'app/login/login';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
+import { ILogin } from './login';
 import { LoginModel } from './login.model';
-import { ElectronService } from 'ngx-electron';
+import { StorageManagerService } from 'app/shared/storage.manager';
 
 @Component({
   templateUrl: './login.component.html',
@@ -10,32 +11,36 @@ import { ElectronService } from 'ngx-electron';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private electronService: ElectronService) { }
+  constructor(private loginService: LoginService, private router: Router, private storageManger: StorageManagerService) { }
 
-  login: ILogin;
   model: LoginModel = new LoginModel('', '');
-  loginError: string;
-  rememberMe: boolean = false;
+  errors: string[] = [];
 
   ngOnInit() {
+    if (this.storageManger.getLogin()) {
+      let data = this.storageManger.getLogin();
+
+      if (data['userId'] > 0) {
+        this.router.navigate(['/user', data['userId']]);
+      }
+    }
   }
 
   onSubmit(event): void {
     event.preventDefault();
-    console.log(this.model);
     this.loginService.login(this.model).subscribe(
-      login => {
-        this.login = login;
-        if (this.rememberMe) {
-          this.saveLogin(login);
-        }
-      },
-      error => this.loginError = error
+      login => this.goToUserPage(login.data),
+      error => {
+        this.errors = JSON.parse(error._body)['errors'];
+        this.model.email = this.model.password = '';
+      }
     );
   }
 
-  private saveLogin(login: ILogin) {
-    this.electronService.ipcRenderer.sendSync('login:success', login);
+  goToUserPage(login: any): void {
+    if (!isNaN(+login.id) || +login.id > 0) {
+      this.router.navigate(['/user', login.id]);
+    }
   }
 
 }
