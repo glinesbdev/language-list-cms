@@ -11,19 +11,41 @@
         <h2 class="text-center">Your Word Lists</h2>
         <div class="row">
           <div class="col-xs-12">
-            <a class="btn btn-default add-list-btn clearfix">
+            <a [routerLink]="['/word-list/new']" [queryParams]="{ userId: model.id }" class="btn btn-default add-list-btn clearfix">
               <i class="glyphicon glyphicon-plus"></i> Add List
             </a>
           </div>
         </div>
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let list of lists">
-            <span class="badge" *ngIf="list.items">{{ list.items.length }}</span>
-            <span class="badge" *ngIf="!list.items">0</span>
-            <a [routerLink]="['/word-list', list.id]">{{ list.name }}</a>
-            <span *ngIf="list.language"> - {{ list.language }}</span>
-          </li>
-        </ul>
+        <div class="row" *ngIf="message">
+            <div class="col-xs-12">
+              <p class="alert alert-info text-center">{{ message }}</p>
+            </div>
+          </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Language</th>
+              <th>Item Count</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of lists; trackBy: trackByList">
+              <td>{{ list.name }}</td>
+              <td>{{ list.language }}</td>
+              <td>{{ list.items ? list.items.length : '0' }}</td>
+              <td>
+                <a [routerLink]="['/word-list', list.id]" class="btn btn-xs btn-default edit-list-btn">
+                  <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+                <a (click)="onListDelete(list)" class="btn btn-xs btn-default delete-list-btn">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

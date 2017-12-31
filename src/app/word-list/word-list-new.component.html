@@ -1,0 +1,38 @@
+<div *ngIf="dataLoaded">
+  <div class="row">
+    <div class="col-xs-12">
+      <a [routerLink]="['/user', user.id]">
+        <i class="glyphicon glyphicon-chevron-left"></i> Back
+      </a>
+    </div>
+  </div>
+  <div class="row" *ngIf="errors.length">
+    <div class="col-xs-12">
+      <ul>
+        <li *ngFor="let error of errors">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="text-center">Add List</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <form (submit)="onSubmit()">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" [(ngModel)]="list.name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Language</label>
+          <input type="text" name="language" [(ngModel)]="list.language" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </div>
+</div>  

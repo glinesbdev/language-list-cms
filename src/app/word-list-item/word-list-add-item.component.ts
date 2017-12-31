@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router/src/router';
 import { ActivatedRoute } from '@angular/router/src/router_state';
 import { WordListItemService } from '../word-list-item/word-list-item.service';
-import { IWordListItem } from 'app/word-list-item/word-list-item';
+import { IWordListItem } from './word-list-item';
 
 @Component({
   templateUrl: './word-list-add-item.component.html',

@@ -19,6 +19,8 @@ export class UserComponent implements OnInit {
   lists: IWordList[] = [];
   userLoaded: boolean = false;
   listsLoaded: boolean = false;
+  message: string;
+  errors: string[] = [];
 
   ngOnInit() {
     if (!this.storageManager.getLogin()) {
@@ -53,6 +55,23 @@ export class UserComponent implements OnInit {
   logout(): void {
     this.storageManager.deleteLogin();
     this.router.navigate(['/login']);
+  }
+
+  onListDelete(list: IWordList): void {
+    if (confirm(`Do you really want to delete ${list.name}?`)) {
+      this.wordListService.deleteList(list.id).subscribe(
+        data => {
+          let index = this.lists.findIndex((item: IWordList) => item === list);
+          this.message = data;
+          this.lists = this.lists.splice(index, index);
+        },
+        error => this.errors.push(error)
+      );
+    }
+  }
+
+  trackByList(index: number, list: IWordList): number {
+    return list.id;
   }
 
 }

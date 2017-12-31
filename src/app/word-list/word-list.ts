@@ -1,7 +1,7 @@
 import { IWordListItem } from "app/word-list-item/word-list-item";
 import { IUser } from "app/user/user";
 
-export interface IWordList {
+export class IWordList {
   id: number;
   name: string;
   language: string;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WordListItemService } from './word-list-item.service';
 import { ActivatedRoute } from '@angular/router/src/router_state';
-import { WordListItemModel } from './word-list-item.model';
 import { Router } from '@angular/router';
+import { IWordListItem } from 'app/word-list-item/word-list-item';
 
 @Component({
   templateUrl: './word-list-edit-item.component.html',
@@ -12,7 +12,7 @@ export class WordListEditItemComponent implements OnInit {
 
   constructor(private wordListItemService: WordListItemService, private router: Router, private route: ActivatedRoute) { }
 
-  model: WordListItemModel;
+  model: IWordListItem;
   itemLoaded: boolean = false;
   listId: number;
   listName: string;

@@ -48,6 +48,25 @@ export class WordListService {
       .catch((err: Response) => Observable.throw(err || 'Server error'));
   }
 
+  editList(body: Object): Observable<IWordList> {
+    let id = body['id'];
+    let headers = this.populateHeaders();
+    let options = this.populateOptions(headers);
+
+    return this.http.put(`${this.apiUrl}/${id}.json`, body, options)
+      .map((data: Response) => data.json().list)
+      .catch((err: Response) => Observable.throw(err || 'Server error'));
+  }
+
+  deleteList(id: number): Observable<any> {
+    let headers = this.populateHeaders();
+    let options = this.populateOptions(headers);
+
+    return this.http.delete(`${this.apiUrl}/${id}.json`, options)
+      .map((data: Response) => data.json().message)
+      .catch((err: Response) => Observable.throw(err || 'Server error'));
+  }
+
   private populateHeaders(): Headers {
     return new Headers({
       'Content-Type': 'application/json',

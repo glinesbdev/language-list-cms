@@ -6,3 +6,11 @@
   float: right;
   margin-bottom: 1em;
 }
+
+.edit-list-btn {
+  color: blue;
+}
+
+.delete-list-btn {
+  color: red;
+}
