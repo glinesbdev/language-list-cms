@@ -5,14 +5,14 @@ export class StorageManagerService {
   constructor() {}
 
   getLogin(): Object {
-    if (localStorage.getItem('login')) {
-      return JSON.parse(localStorage.getItem('login'));
-    }
-
-    return undefined;
+    return localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')) : undefined;
   }
 
   setLogin(data: any): void {
     localStorage.setItem('login', data);
+  }
+
+  deleteLogin(): void {
+    localStorage.removeItem('login');
   }
 }

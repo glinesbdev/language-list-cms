@@ -1,1 +1,22 @@
-<div *ngIf="dataLoaded">{{ model.email }}</div>
+<div class="user-detail-wrapper" *ngIf="userLoaded">
+  <div class="row">
+    <div class="col-xs-12">
+        <span *ngIf="model.username">Welcome <span class="bold">{{ model.username }}</span></span>
+        <span *ngIf="model.email && !model.username" class="bold">Welcome <span class="bold">{{ model.email }}</span></span>
+        <a href="javascript:void(0)" class="logout-btn" (click)="logout()">Logout</a>
+    </div>
+  </div>
+  <div *ngIf="listsLoaded">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="text-center">Your Word Lists</h4>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let list of lists">
+            <span class="badge" *ngIf="list.items.length">{{ list.items.length }}</span>
+            {{ list.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

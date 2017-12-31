@@ -7,6 +7,7 @@ import { AppRouterModule } from './router/app-router.module';
 
 import { LoginService } from './login/login.service';
 import { UserService } from './user/user.service';
+import { WordListService } from './word-list/word-list.service';
 
 import { AppComponent } from './app.component';
 import { StorageManagerService } from './shared/storage.manager';
@@ -25,7 +26,8 @@ import { StorageManagerService } from './shared/storage.manager';
   providers: [
     LoginService,
     UserService,
-    StorageManagerService
+    StorageManagerService,
+    WordListService
   ],
   bootstrap: [AppComponent]
 })
