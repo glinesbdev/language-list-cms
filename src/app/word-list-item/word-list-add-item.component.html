@@ -21,6 +21,29 @@
       <div class="form-group">
         <label>Word</label>
         <input type="text" [(ngModel)]="model.word" class="form-control" name="word" />
+        <button type="button" class="btn btn-default btn-xs" (click)="onGetTranslation()" *ngIf="showTranslationButton()">Google Translate</button>
+      </div>
+      <div class="results" *ngIf="result | async">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Word</th>
+              <th>Language</th>
+              <th>Reliability</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let word of result.value.words; let i = index;">
+              <td>{{ word }}</td>
+              <td>{{ result.value.languages[i].language }}</td>
+              <td>{{ result.value.languages[i].reliability }}</td>
+              <td>
+                <button type="button" class="btn btn-xs btn-primary" name="{{ word + i }}" (click)="onChoose(word)">Choose</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="form-group">
         <label>Translation</label>

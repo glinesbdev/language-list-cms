@@ -10,6 +10,7 @@ import { UserService } from './user/user.service';
 import { WordListService } from './word-list/word-list.service';
 import { StorageManagerService } from './shared/storage.manager';
 import { WordListItemService } from './word-list-item/word-list-item.service';
+import { TranslationService } from './translation/translation.service';
 
 import { AppComponent } from './app.component';
 
@@ -29,7 +30,8 @@ import { AppComponent } from './app.component';
     UserService,
     StorageManagerService,
     WordListService,
-    WordListItemService
+    WordListItemService,
+    TranslationService
   ],
   bootstrap: [AppComponent]
 })
