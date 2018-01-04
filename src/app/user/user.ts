@@ -5,4 +5,5 @@ export interface IUser {
   username: string;
   admin: boolean;
   url: string;
+  language: string;
 }

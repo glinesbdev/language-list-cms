@@ -1,7 +1,12 @@
-<div class="user-detail-wrapper" *ngIf="userLoaded">
+<div *ngIf="userLoaded">
   <div class="row">
     <div class="col-xs-12">
-        <span>Welcome <span class="bold">{{ model.username ? model.username : model.email }}</span></span>
+        <span>
+          Welcome <span class="bold">{{ model.username ? model.username : model.email }}</span>
+          <a [routerLink]="['/user', model.id, 'detail']">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </a>
+        </span>
         <a href="javascript:void(0)" class="logout-btn" (click)="logout()">Logout</a>
     </div>
   </div>

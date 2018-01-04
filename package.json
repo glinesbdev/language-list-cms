@@ -6,11 +6,12 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "electron": "electron .",
-    "test": "ng test",
-    "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "protractor"
+    "test": "karma start ./karma.conf.js",
+    "build": "webpack",
+    "start": "webpack-dev-server --port=4200",
+    "pree2e": "webdriver-manager update --standalone false --gecko false --quiet",
+    "e2e": "protractor ./protractor.conf.js"
   },
   "private": true,
   "dependencies": {
@@ -29,10 +30,10 @@
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
+    "@angular/cli": "^1.6.3",
     "@angular/compiler-cli": "^2.3.1",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
-    "angular-cli": "1.0.0-beta.28.3",
     "bootstrap3": "^3.3.5",
     "codelyzer": "~2.0.0-beta.1",
     "dotenv": "^4.0.0",
@@ -47,6 +48,27 @@
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
-    "typescript": "~2.0.3"
+    "typescript": "~2.0.3",
+    "webpack-dev-server": "~2.9.3",
+    "webpack": "~3.10.0",
+    "autoprefixer": "^6.5.3",
+    "css-loader": "^0.28.1",
+    "cssnano": "^3.10.0",
+    "exports-loader": "^0.6.3",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.29.0",
+    "less-loader": "^4.0.5",
+    "postcss-loader": "^2.0.8",
+    "postcss-url": "^7.1.2",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.3",
+    "source-map-loader": "^0.2.0",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "style-loader": "^0.13.1",
+    "stylus-loader": "^3.0.1",
+    "url-loader": "^0.6.2",
+    "circular-dependency-plugin": "^4.2.1",
+    "copy-webpack-plugin": "^4.1.1",
+    "uglifyjs-webpack-plugin": "^1.1.5"
   }
 }

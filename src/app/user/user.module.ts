@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
+import { UserDetailComponent } from './user-detail.component';
 import { UserRouterModule } from '../router/user-router.module';
 import { WordListDetailComponent } from '../word-list/word-list-detail.component';
 import { WordListNewComponent } from '../word-list/word-list-new.component';
@@ -16,6 +17,7 @@ import { WordListEditItemComponent } from '../word-list-item/word-list-edit-item
   ],
   declarations: [
     UserComponent,
+    UserDetailComponent,
     WordListDetailComponent,
     WordListNewComponent,
     WordListAddItemComponent,

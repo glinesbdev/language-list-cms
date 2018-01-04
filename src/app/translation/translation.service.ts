@@ -24,4 +24,13 @@ export class TranslationService {
       .catch((err: Response) => Observable.throw(err || 'Server error'));
   }
 
+  getLanguages(): Observable<string[]> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(`${this.apiUrl}/langauges.json`, options)
+      .map((data: Response) => data.json().languages)
+      .catch((err: Response) => Observable.throw(err || 'Server error'));      
+  }
+
 }

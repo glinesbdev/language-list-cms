@@ -8,6 +8,8 @@ import { WordListService } from 'app/word-list/word-list.service';
 import { IWordList } from 'app/word-list/word-list';
 import { Observable } from 'rxjs/Observable';
 import { ITranslation } from 'app/translation/translation';
+import { setTimeout } from 'timers';
+const { remote , ipcRenderer } = require('electron');
 
 @Component({
   templateUrl: './word-list-add-item.component.html',
@@ -22,8 +24,6 @@ export class WordListAddItemComponent implements OnInit {
   model: IWordListItem = new IWordListItem();
   list: IWordList = new IWordList();
   listLoaded: boolean = false;
-  result: Observable<ITranslation>;
-  showResults: boolean = false;
 
   ngOnInit() {
     this.listId = this.route.snapshot.queryParams['listId'];
@@ -36,6 +36,10 @@ export class WordListAddItemComponent implements OnInit {
       },
       error => console.error(error)
     );
+
+    ipcRenderer.on('translate:success', (event, result) => {
+      this.model.translation = <string>result;
+    });
   }
 
   onSubmit(event): void {
@@ -47,11 +51,9 @@ export class WordListAddItemComponent implements OnInit {
   }
 
   onGetTranslation(): void {
-    this.translationSerivce.translate('english', this.list.language, [this.model.word]).subscribe(
+    this.translationSerivce.translate(this.list.user.language, this.list.language, [this.model.word]).subscribe(
       result => {
-        console.log(result);
-        this.result = Observable.of(result);
-        this.showResults = true;
+        ipcRenderer.send('translate', result);
       },
       error => console.error(error)
     );
@@ -59,10 +61,6 @@ export class WordListAddItemComponent implements OnInit {
 
   showTranslationButton(): boolean {
     return (this.model.word && this.model.word.length && this.listLoaded) ? true : false;
-  }
-
-  onChoose(word: string): void {
-    this.model.translation = word;
   }
 
 }

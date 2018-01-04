@@ -28,7 +28,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of model.items">
+          <tr *ngFor="let item of model.items; trackBy: trackByItem;">
             <td>{{ item.item.word }}</td>
             <td>{{ item.item.translation }}</td>
             <td>{{ item.item.context }}</td>

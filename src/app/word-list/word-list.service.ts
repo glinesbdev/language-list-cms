@@ -6,7 +6,8 @@ import { StorageManagerService } from 'app/shared/storage.manager';
 import { Observable } from 'rxjs/Observable';
 import { RequestOptions } from '@angular/http/src/base_request_options';
 import { IWordList } from './word-list';
-import 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch'
 
 
 @Injectable()

@@ -6,7 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { StorageManagerService } from 'app/shared/storage.manager';
 import { RequestOptions } from '@angular/http/src/base_request_options';
 import { IWordListItem } from './word-list-item';
-import 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch'
 
 @Injectable()
 export class WordListItemService {
